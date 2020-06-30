@@ -5,6 +5,7 @@ alter sequence messageforadvert_date_seq owner to postgres;
 create table advert
 (
     id                  serial not null,
+    mark                varchar,
     model               varchar,
     color               varchar,
     yearcar             integer,

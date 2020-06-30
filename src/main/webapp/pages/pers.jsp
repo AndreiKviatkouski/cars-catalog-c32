@@ -19,7 +19,7 @@
                 <a class="nav-link" href="/pers/editProfile">   Edit you profile  <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/pers/youadvert">   You advert   <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/pers/youAdvert">   You advert   <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/pers//interestingAdvert">  Interesting advert <span class="sr-only">(current)</span></a>

@@ -21,14 +21,14 @@ public class AddAdvertFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException, NumberFormatException {
 
         if (req.getMethod().equals("POST")) {
-
+            String mark = req.getParameter("mark");
             String model = req.getParameter("model");
             String color = req.getParameter("color");
             String year = req.getParameter("year");
             String prise = req.getParameter("prise");
 
             try {
-                if (model != null || color != null || year != null || prise != null) {
+                if (mark != null || model != null || color != null || year != null || prise != null) {
                     if (Integer.parseInt(year) < 2021 && Integer.parseInt(year) > 1950 && Double.parseDouble(prise) > 0) {
                         chain.doFilter(req, res);
                     }

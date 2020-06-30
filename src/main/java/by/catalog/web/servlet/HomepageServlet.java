@@ -1,5 +1,6 @@
 package by.catalog.web.servlet;
 
+import by.catalog.domain.Advert;
 import by.catalog.service.AdvertService;
 
 import javax.servlet.ServletException;
@@ -22,10 +23,25 @@ public class HomepageServlet extends HttpServlet {
         ArrayList advertList = new ArrayList<>(lastAdverts);
         req.setAttribute("advertList", advertList);
 
+        List MarkList = advertService.returnSortMark();
+        req.setAttribute("AllAdvertMarks", MarkList);
+
+        String mark = req.getParameter("mark");
+        if (mark != null) {
+            if (mark.equals("anyMark")) {
+                req.setAttribute("hadChosen", false);
+            } else {
+                List<String> modelByMark = advertService.returnModelByMark(mark);
+                req.setAttribute("modelByMark", modelByMark);
+                req.setAttribute("mark", mark);
+                req.setAttribute("hadChosen", true);
+                List<Advert> advertByMark = advertService.findAdvertByMark(mark);
+                req.setAttribute("advertList", advertByMark);
+            }
+        }
 
         Calendar calendar = new GregorianCalendar();
         Date data = calendar.getTime();
-
 
         Date time = (Date) getServletContext().getAttribute("name");
         resp.getWriter().println(time);
@@ -36,9 +52,15 @@ public class HomepageServlet extends HttpServlet {
         req.setAttribute("calendar", df + "  " + data);
         req.getServletContext().getRequestDispatcher("/pages/index.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        AdvertService advertService = new AdvertService();
+        String markCar = req.getParameter("mark");
+        req.setAttribute("mark", markCar);
+        String model = req.getParameter("model");
+        List<Advert> advertByModel = advertService.findAdvertByModel(markCar, model);
+        req.setAttribute("advertList", advertByModel);
+        req.getServletContext().getRequestDispatcher("/pages/index.jsp").forward(req, resp);
+    }
 }
-
-
-
-
-

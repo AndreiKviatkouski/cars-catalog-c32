@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/pers/interestingAdvert")
-public class interestingAdvertServlet extends HttpServlet {
+@WebServlet(name = "YouAdvertsServlet", urlPatterns = "/pers/youAdvert")
+public class YouAdvertServlet extends HttpServlet {
+
+    private AdvertService advertService = new AdvertService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User currentUser = (User) req.getSession().getAttribute("currentUser");
-        AdvertService advertService = new AdvertService();
-        List<Advert> allAdvertsFromUser = (List) advertService.findAllInterestingAdverts(currentUser.getId());
-        req.setAttribute("listAdvert", allAdvertsFromUser);
-        req.getServletContext().getRequestDispatcher("/pages/interestingAdvert.jsp").forward(req, resp);
+        List<Advert> allAdverts = advertService.getAllUserAdvert(currentUser.getId());
+        req.setAttribute("allYouAdverts", allAdverts);
+        getServletContext().getRequestDispatcher("/pages/youAdvert.jsp").forward(req, resp);
     }
-
 }

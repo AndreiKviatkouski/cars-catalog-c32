@@ -44,16 +44,26 @@
     <dd class="col-sm-8">${requestScope.advert.dateAdvert}</dd>
 </dl>
 
-<dl class="row offset-sm-1" >
-<div class="card w-50">
-    <div class="card-header">
-        Описание
-    </div>
-    <div class="card-body">
-        <p class="card-text">${requestScope.advert.specificationAdvert}</p>
-    </div>
-</div>
-</dl>
+<h3>Имя владельца</h3>
+${requestScope.user.name}
+<h3>Фамилия владельца</h3>
+${requestScope.user.lastName}
+<h3>Телефон владельца</h3>
+${requestScope.user.phone}
+<h3>Марка автомобтля</h3>
+${requestScope.advert.markCar}
+<h3>Модель автомобиля</h3>
+${requestScope.advert.modelCar}
+<h3>Цвет автомобиля</h3>
+${requestScope.advert.colorCar}
+<h3>Год автомобиля</h3>
+${requestScope.advert.yearCar}
+<h3>Цена автомобиля</h3>
+${requestScope.advert.priceCar}
+<h3>Описание</h3>
+${requestScope.advert.specificationAdvert}
+<h3>Дата регистрации</h3>
+${requestScope.advert.dateAdvert}
 
 <c:if test="${sessionScope.checkAuth}">
 

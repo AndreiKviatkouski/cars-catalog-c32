@@ -12,12 +12,12 @@ public class AdvertService {
 
     private final AdvertStorage advertStorage = new AdvertStorage();
 
-    public void saveAdvert(String model, String color, int year, double price, long idUser, String specificationAdvert) {
+    public void saveAdvert(String mark, String model, String color, int year, double price, long idUser, String specificationAdvert) {
         AdvertStorage advertStorage = new AdvertStorage();
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("E dd.MM.yyyy ' время' hh:mm");
         String date = formatForDateNow.format(dateNow).toString();
-        advertStorage.addAdvert(new Advert(model, color, year, price, idUser, date, specificationAdvert));
+        advertStorage.addAdvert(new Advert(mark, model, color, year, price, idUser, date, specificationAdvert));
     }
 
 
@@ -31,7 +31,7 @@ public class AdvertService {
         // FIXME: 6/13/20
     }
 
-    public List<Advert> findAllAdvertsFromUser(long idUser) {
+    public List<Advert> findAllInterestingAdverts(long idUser) {
         List<Advert> list = new ArrayList<>();
         List allIdAdvertByIdUser = advertStorage.getAllIdAdvertByIdUser(idUser);
         for (int i = 0; i < allIdAdvertByIdUser.size(); i++) {
@@ -49,12 +49,12 @@ public class AdvertService {
 //        return null;
 //    }
 
+
     public List<Advert> getLastAdverts() {
         List<Advert> list = new ArrayList<>();
         List allAdverts = advertStorage.getAllAdverts();
         for (int i = allAdverts.size() - 1; i > allAdverts.size() - 20 && i > -1; i--) {
             Advert advert = (Advert) allAdverts.get(i);
-
             list.add(advert);
         }
         return list;
@@ -67,8 +67,40 @@ public class AdvertService {
         return null;
     }
 
+    public List<Advert> findAdvertByMark(String mark) {
+        List<Advert> listBySearch = new ArrayList<>();
+        List allAdverts = advertStorage.getAllAdverts();
+        for (int i = 0; i < allAdverts.size(); i++) {
+            Advert advert = (Advert) allAdverts.get(i);
+            if (advert.getMarkCar().equals(mark)) {
+                listBySearch.add(advert);
+            }
+        }
+        return listBySearch;
+    }
+
+    public List<Advert> findAdvertByModel(String mark, String model) {
+        List<Advert> listBySearch = new ArrayList<>();
+        List markAdverts = findAdvertByMark(mark);
+        for (int i = 0; i < markAdverts.size(); i++) {
+            Advert advert = (Advert) markAdverts.get(i);
+            if (advert.getModelCar().equals(model)) {
+                listBySearch.add(advert);
+            }
+        }
+        return listBySearch;
+    }
+
+    public List<String> getAdvertMarks() {
+        return advertStorage.getAllAdvertMark();
+    }
+
     public List<String> returnModelByMark(String mark) {
         return advertStorage.getModelByMark(mark);
+    }
+
+    public List<String> returnMarkByModel(String model) {
+        return advertStorage.getMarkByModel(model);
     }
 
     public List<String> returnSortMark() {
@@ -90,6 +122,25 @@ public class AdvertService {
         return listMark;
     }
 
+    public List<String> returnSortModel() {
+        List<String> listModel = new ArrayList<>();
+        boolean b = true;
+        List<String> allModel = advertStorage.getAllModel();
+        for (String mark : allModel) {
+            for (String mark1 : listModel) {
+                b = true;
+                if (mark.equals(mark1)) {
+                    b = false;
+                    break;
+                }
+            }
+            if (b) {
+                listModel.add(mark);
+            }
+        }
+        return listModel;
+    }
+
     public List<Integer> listYear() {
         List<Integer> listYear = new ArrayList<>();
         for (int i = 1980; i < 2021; i++) {
@@ -98,10 +149,9 @@ public class AdvertService {
         return listYear;
     }
 
-    public String[] colorList (){
+    public String[] colorList() {
         return new String[]{"black", "white", "silver", "brown", "gray", "red", "blue"};
     }
-
 
     public void deleteInterestingAdvert(long idAdvert, long idUser){
         advertStorage.removeIdAdvertIdUser(idAdvert, idUser);
@@ -110,4 +160,9 @@ public class AdvertService {
     public boolean checkIntrAdvert(long idAdvert, long idUser){
        return advertStorage.checkIdUserIdAdvert(idUser, idAdvert);
     }
+
+    public List<Advert> getAllUserAdvert(long idUser){
+       return advertStorage.getAllAdvertByIdUser(idUser);
+    }
 }
+
