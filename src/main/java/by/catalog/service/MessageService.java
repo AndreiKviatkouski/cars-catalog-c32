@@ -13,7 +13,7 @@ public class MessageService {
     public void saveMessage(long idAdvert, long idUser, String body) {
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("E dd.MM.yyyy ' время' hh:mm");
-        String date = formatForDateNow.format(dateNow).toString();
+        String date = formatForDateNow.format(dateNow);
         messageStorage.addMessage(new Message(idAdvert, idUser, body, date));
     }
 

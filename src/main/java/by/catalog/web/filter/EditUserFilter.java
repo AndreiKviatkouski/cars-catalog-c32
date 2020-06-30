@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @WebFilter(servletNames = "EditProfileServlet")
 public class EditUserFilter extends HttpFilter {
-    private UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
@@ -43,7 +43,7 @@ public class EditUserFilter extends HttpFilter {
                 getServletContext().getRequestDispatcher("/pages/editProfile.jsp").forward(req, res);
                 return;
             }
-                chain.doFilter(req, res);
+            chain.doFilter(req, res);
         }
     }
 }

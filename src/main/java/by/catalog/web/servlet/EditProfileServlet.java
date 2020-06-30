@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "EditProfileServlet", urlPatterns = "/pers/editProfile")
 public class EditProfileServlet extends HttpServlet {
 
-    private UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

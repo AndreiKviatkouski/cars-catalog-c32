@@ -16,7 +16,7 @@ public class AdvertService {
         AdvertStorage advertStorage = new AdvertStorage();
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("E dd.MM.yyyy ' время' hh:mm");
-        String date = formatForDateNow.format(dateNow).toString();
+        String date = formatForDateNow.format(dateNow);
         advertStorage.addAdvert(new Advert(mark, model, color, year, price, idUser, date, specificationAdvert));
     }
 

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User {
 
     private long id;
@@ -17,7 +18,7 @@ public class User {
     private  String phone;
     private  String role;
 
-        public User(String name, String lastName, String login, String password, String phone, String role) {
+    public User(String name, String lastName, String login, String password, String phone, String role) {
         this.name = name;
         this.lastName = lastName;
         this.login = login;

@@ -96,7 +96,7 @@ public class UserStorage {
     }
 
 
-    public void updateUserById (long id, User user) {
+    public void updateUserById(long id, User user) {
         try {
             connection = DriverManager.getConnection(URL_TABLES, LOGIN_TABLES, PASS_TABLES);
             PreparedStatement preparedStatement = connection.prepareStatement("update userscarcatalog set name = ?, lastName = ?, login = ?, password = ?, phone= ? where id = ?");

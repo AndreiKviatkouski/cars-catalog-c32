@@ -42,17 +42,17 @@
 
     <div class="container">
         <div class="row row-cols-3">
-        <c:forEach items="${requestScope.advertList}" var="last">
-            <div class="col">
-            <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">${last.modelCar}</h5>
-            <p class="card-text">${last}</p>
-            <a href="/advert?id=${last.id}">Go somewhere</a>
-            </div>
-            </div>
-            </div>
-        </c:forEach>
+            <c:forEach items="${requestScope.advertList}" var="last">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">${last.modelCar}</h5>
+                            <p class="card-text">${last}</p>
+                            <a href="/advert?id=${last.id}">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
 
