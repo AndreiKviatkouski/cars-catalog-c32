@@ -24,8 +24,9 @@ public class Advert {
     private String specificationAdvert;
     private List<Message> message;
 
-    public Advert(long id, String modelCar, String colorCar, int yearCar, double priceCar, long idUser) {
+    public Advert(long id, String markCar, String modelCar, String colorCar, int yearCar, double priceCar, long idUser) {
         this.id = id;
+        this.markCar = markCar;
         this.modelCar = modelCar;
         this.colorCar = colorCar;
         this.yearCar = yearCar;
@@ -33,7 +34,8 @@ public class Advert {
         this.idUser = idUser;
     }
 
-    public Advert(String modelCar, String colorCar, int yearCar, double priceCar, long idUser, List<Message> message) {
+    public Advert(String markCar, String modelCar, String colorCar, int yearCar, double priceCar, long idUser, List<Message> message) {
+        this.markCar = markCar;
         this.modelCar = modelCar;
         this.colorCar = colorCar;
         this.yearCar = yearCar;
@@ -42,12 +44,15 @@ public class Advert {
         this.message = message;
     }
 
-    public Advert(String modelCar, String colorCar, int yearCar, double priceCar, long idUser) {
+    public Advert(String markCar, String modelCar, String colorCar, int yearCar, double priceCar, long idUser, String dateAdvert, String specificationAdvert) {
+        this.markCar = markCar;
         this.modelCar = modelCar;
         this.colorCar = colorCar;
         this.yearCar = yearCar;
         this.priceCar = priceCar;
         this.idUser = idUser;
+        this.specificationAdvert = specificationAdvert;
+        this.dateAdvert = dateAdvert;
     }
 
 

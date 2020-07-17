@@ -30,13 +30,13 @@ public class AdvertServlet extends HttpServlet {
         boolean b1 = false;
         User currentUser = (User) req.getSession().getAttribute("currentUser");
         if (currentUser != null){
-        b = true;
-        b1 = advertService.checkIntrAdvert(idAdvert, currentUser.getId());}
+            b = true;
+            b1 = advertService.checkIntrAdvert(idAdvert, currentUser.getId());}
         boolean checkIntrAdd = b&&!b1;
         boolean checkIntrRem = b&&b1;
         req.setAttribute("checkIntrAdd", checkIntrAdd);
         req.setAttribute("checkIntrRem", checkIntrRem);
         req.getServletContext().getRequestDispatcher("/pages/advert.jsp").forward(req, resp);
-     }
+    }
 }
 

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/addAdvert", name = "AddAdvertServlet")
-
 public class AddAdvertServlet extends HttpServlet {
 
 
@@ -26,26 +25,28 @@ public class AddAdvertServlet extends HttpServlet {
         req.setAttribute("listYear", listYear);
         String mark = req.getParameter("mark");
         if (mark != null){
-        List listCar = (List) advertService.returnModelByMark(mark);
+            List listCar = (List) advertService.returnModelByMark(mark);
             String[] colorList = advertService.colorList();
+            req.getSession().setAttribute("markSession", mark);
             req.setAttribute("colorList", colorList);
             req.setAttribute("checkModelCar", true);
-        req.setAttribute("listCar", listCar);
-}
+            req.setAttribute("listCar", listCar);
+        }
         getServletContext().getRequestDispatcher("/pages/addAdvert.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         User currentUSer = (User) req.getSession().getAttribute("currentUser");
+        String mark = (String) req.getSession().getAttribute("markSession");
+        req.getSession().removeAttribute("markSession");
         String model = req.getParameter("model");
         String color = req.getParameter("color");
         int year = Integer.parseInt(req.getParameter("year"));
         double prise = Double.parseDouble(req.getParameter("prise"));
         long id_user = currentUSer.getId();
         String specificationAdvert = req.getParameter("specificationAdvert");
-        advertService.saveAdvert(model, color, year, prise, id_user, specificationAdvert);
+        advertService.saveAdvert(mark, model, color, year, prise, id_user, specificationAdvert);
         req.setAttribute("messageAccount", "Advert successfully added");
         resp.sendRedirect("/");
     }

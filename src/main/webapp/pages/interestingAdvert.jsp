@@ -25,7 +25,7 @@
             <div class="col">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">${last.modelCar}</h5>
+                        <h5 class="card-title">${last.markCar} ${last.modelCar}</h5>
                         <p class="card-text">${last}</p>
                         <a href="/advert?id=${last.id}">Go somewhere</a>
                     </div>

@@ -15,7 +15,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/pers"> Return   <span class="sr-only">(current)</span></a>
             </li>
-         </ul>
+        </ul>
     </div>
 </nav>
 
@@ -25,7 +25,7 @@
             <div class="col">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">${list.modelCar}</h5>
+                        <h5 class="card-title">${list.markCar} ${list.modelCar}</h5>
                         <p class="card-text">${list}</p>
                         <a href="/advert?id=${list.id}">Go somewhere</a>
                     </div>

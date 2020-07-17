@@ -19,8 +19,6 @@
         <a href="/addAdvert">Add Advert |</a>
         <a href="/pers">Personal Account |</a>
         <a href="/logout">Logout |</a>
-
-
         <c:if test="${sessionScope.currentAdmin && sessionScope.checkAuth}">
             <a href="/listAllUsers">Show all users |</a>
             <a href="/deleteUsers">Delete user |</a>
@@ -34,11 +32,38 @@
             <a href="/index">Go to main page |</a>
             <a href="/logout">Logout |</a>
         </c:if>
-
     </c:if>
 
 
+    <c:if test="${!requestScope.hadChosen}">
+        <form action="" method="get">
+            <select name="mark">
+                <option style="color:gray" value="anyMark">Any mark</option>
+                <c:forEach items="${requestScope.AllAdvertMarks}" var="var">
+                    <option value="${var}"> ${var} </option>
+                </c:forEach>
+            </select>
+            <button>Sub</button>
+            <a href="/">Clear</a>
+        </form>
+    </c:if>
 
+    <c:if test="${requestScope.hadChosen}">
+        <form action="" method="post">
+            <select name="mark">
+                <option value="${requestScope.mark}">${requestScope.mark}</option>
+            </select>
+            <select name="model">
+                <option style="color:gray" value="anyModel">Any model</option>
+                <c:forEach items="${requestScope.modelByMark}" var="model">
+                    <option value="${model}">${model}</option>
+                </c:forEach>
+            </select>
+            <button>Submit</button>
+            <a href="/">Clear</a>
+
+        </form>
+    </c:if>
 
     <div class="container">
         <div class="row row-cols-3">
@@ -46,7 +71,7 @@
                 <div class="col">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                            <h5 class="card-title">${last.modelCar}</h5>
+                            <h5 class="card-title">${last.markCar} ${last.modelCar}</h5>
                             <p class="card-text">${last}</p>
                             <a href="/advert?id=${last.id}">Go somewhere</a>
                         </div>

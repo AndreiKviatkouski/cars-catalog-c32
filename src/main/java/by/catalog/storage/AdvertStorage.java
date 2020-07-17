@@ -27,8 +27,8 @@ public class AdvertStorage {
         try {
             connection = DriverManager.getConnection(URL_TABLES, LOGIN_TABLES, PASS_TABLES);
             PreparedStatement preparedStatement = connection.prepareStatement("insert into advert (id, mark, model, color, yearcar, price, id_user, dateadvert, specificationadvert) values (default , ?, ? , ? , ? , ?, ?, ?, ?)");
-            preparedStatement.setString(1, advert.getModelCar());
-            preparedStatement.setString(2, advert.getMarkCar());
+            preparedStatement.setString(1, advert.getMarkCar());
+            preparedStatement.setString(2, advert.getModelCar());
             preparedStatement.setString(3, advert.getColorCar());
             preparedStatement.setInt(4, advert.getYearCar());
             preparedStatement.setDouble(5, advert.getPriceCar());
@@ -78,14 +78,15 @@ public class AdvertStorage {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 long id = resultSet.getLong(1);
-                String model = resultSet.getString(2);
-                String color = resultSet.getString(3);
-                int yearCar = resultSet.getInt(4);
-                double price = resultSet.getDouble(5);
-                String date = resultSet.getString(7);
-                String specification = resultSet.getString(8);
+                String mark = resultSet.getString(2);
+                String model = resultSet.getString(3);
+                String color = resultSet.getString(4);
+                int yearCar = resultSet.getInt(5);
+                double price = resultSet.getDouble(6);
+                String date = resultSet.getString(8);
+                String specification = resultSet.getString(9);
                 List<Message> messages = messageStorage.returnMessageByIdAdvert(id);
-                adverts.add( new Advert(id, model, color, yearCar, price, idUser, date, specification, messages));
+                adverts.add( new Advert(id, mark, model, color, yearCar, price, idUser, date, specification, messages));
             }
             return adverts;
         } catch (SQLException e) {
